@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Book Search</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
+</head>
+
+
+<body>
+    <header>
+        <h1>Best Books!</h1>
+        <section id='headerImg'>
+            <img src="img/hamburger.jpg">
+        </section>
+        <section id="pageTitle">Search by Title or Author</section>
+    </header>
+    <main>
+        <section>
+            <form id="addForm" action="/searches" method="POST">
+                <fieldset>
+                    <legend>
+                        <h2>Search by title or author</h2>
+                    </legend>
+                    <p>
+                        <input type="text" name="search" id="book" placeholder="Enter a title or author" required>
+                    </p>
+                    <fieldset>
+                        <p>
+                            <input type="radio" id="title" name="search" value="title">
+                            <label for="title">Title</label><br>
+                        </p>
+                        <p>
+                            <input type="radio" id="author" name="search" value="author">
+                            <label for="author">Author</label><br>
+                        </p>
+                    </fieldset>
+                    <button type="submit" id="submit">Search the Google Books API</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
