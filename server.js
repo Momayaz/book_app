@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
-const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+// const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 app.set('views', 'views/');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
