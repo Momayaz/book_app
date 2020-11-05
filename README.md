@@ -1,34 +1,14 @@
-# Project Name
+book_app
+Author: Momayaz Al-Doos Version: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
-**Author**: Your Name Goes Here
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+Number and name of feature: 1 Estimate of time needed to complete: 15min Start time: 1:00pm Finish time: 1:15pm Actual time needed to complete: 15min
 
-## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code 301 class. (i.e. What's your problem domain?) -->
+Number and name of feature: 2 Estimate of time needed to complete: 30min Start time: 1:15pm Finish time: 2:00pm Actual time needed to complete: 45min
 
-## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+Number and name of feature: 3 Estimate of time needed to complete: 15min Start time: 2:00pm Finish time: 2:15pm Actual time needed to complete: 15min
 
-## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+Number and name of feature: 4 Estimate of time needed to complete: 5min Start time: 2:15pm Finish time: 2:20pm Actual time needed to complete: 5min
 
-## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
+Number and name of feature: 5 Estimate of time needed to complete: 15min Start time: 2:20pm Finish time: 2:35pm Actual time needed to complete: 15min
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
-
-## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
--->
-
-
-
-Number and name of feature:  creating the structures for Book_App
-
-Estimate of time needed to complete: two hours 
-
-Start time: 1pm
-
-Finish time: 2:45pm
-
-Actual time needed to complete: two hours and 45 menut
+Number and name of feature: 6 Estimate of time needed to complete: 5min Start time: 2:35pm Finish time: 2:40pm Actual time needed to complete: 5min

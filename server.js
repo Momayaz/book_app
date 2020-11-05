@@ -10,28 +10,40 @@ const app = express();
 app.use(cors());
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
-// const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+const DATABASE_URL = process.env.DATABASE_URL;
 app.set('views', 'views/');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+const client = new pg.Client(DATABASE_URL);
 
-app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
+client.connect().then(() => {
+  app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
+}).catch(error => {
+  console.log('error', error);
+});
 
 app.get('/', homePage);
-app.get('/searches/new', getBook);
-app.post('/searches', searchForBooks);
+app.get('/searches/new', getBooks);
+app.post('/searches', findBooks);
+app.get('/books/add', getAddForm);
+app.post('/books', addBook);
+app.get('/books/:book_id', showOneBook);
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 function homePage(request, response) {
-  response.render('pages/index');
+  let selectBooks = 'SELECT id, author, title, isbn, image_url, description FROM books;';
+  client.query(selectBooks).then(result => {
+    response.render('pages/index', { booksList: result.rows, booksCount: result.rows.length });
+  });
 }
 
-function getBook(request, response) {
+function getBooks(request, response) {
   response.render('pages/searches/new');
 
 }
 
-function searchForBooks(request, response) {
+function findBooks(request, response) {
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   if (request.body.search[1] === 'title') { url += `+intitle:${request.body.search[0]}&max-results=10`; }
   if (request.body.search[1] === 'author') { url += `+inauthor:${request.body.search[0]}&max-results=10`; }
@@ -41,8 +53,36 @@ function searchForBooks(request, response) {
     })
   ).then(results => {
     response.render('pages/searches/show', { booksResults: booksArray });
+
   }).catch(() => {
     response.status(500).send('Something Went Wrong');
+  });
+}
+
+function showOneBook(request, response) {
+  const selectedBook = 'SELECT * FROM books WHERE id=$1';
+  const safeValues = [request.params.book_id];
+  client.query(selectedBook, safeValues).then(data => {
+    response.render('pages/books/show', {
+      book: data.rows[0]
+    });
+  }).catch(() => {
+    response.status(500).send('Something Went Wrong');
+  });
+}
+
+
+function getAddForm(request, response){
+  response.render('pages/books/add');
+
+}
+function addBook (request, response){
+  const [author, title, isbn, image_url, description] = request.body.add;
+  console.log(request.body);
+  const insertedBook = 'INSERT INTO books (author, title, isbn, image_url, description) VALUES($1,$2,$3,$4,$5);';
+  const safeValues = [author, title, isbn, image_url, description];
+  client.query(insertedBook,safeValues).then(() => {
+    response.status(200).redirect('/');
   });
 }
 
